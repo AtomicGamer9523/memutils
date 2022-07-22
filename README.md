@@ -1,2 +1,3 @@
-# rstools
-Rust Tools
+# RSTools
+
+## Tools for rust
