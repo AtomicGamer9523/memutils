@@ -6,7 +6,7 @@ mod closures;
 mod systems;
 mod ctools;
 mod nulls;
-pub mod log;
+// pub mod log;
 pub use closures::{
     AdvClosure,
     Clossures,
