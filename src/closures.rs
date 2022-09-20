@@ -1,18 +1,23 @@
-pub type Closure = Box<dyn FnOnce() -> () + Send + 'static>;
-pub type AdvClosure = Box<dyn Fn() -> () + Send + 'static>;
+pub trait MutClosure {
+    fn call<F: FnMut() -> () + Send + 'static>(_: F);
+}
+pub trait OnceClosure {
+    fn call<F: FnOnce() -> () + Send + 'static>(_: F);
+}
 
-pub struct Clossures;
-impl Clossures {
-    pub fn safe_closure<F: FnOnce() -> () + Send + 'static>(f: F){
+pub struct Closure;
+impl Closure {
+    pub fn call<F: FnOnce() -> () + Send + 'static>(f: F) {
         f();
     }
-    pub unsafe fn unsafe_closure<F: FnOnce() -> () + Send + 'static>(f: F){
+}
+impl MutClosure for Closure {
+    fn call<F: FnMut() -> () + Send + 'static>(mut f: F) {
         f();
     }
-    pub fn uclosure<F: FnOnce() -> () + Send + 'static>(f: F){
-        #[allow(unused_unsafe)]
-        unsafe {
-            f();
-        };
+}
+impl OnceClosure for Closure {
+    fn call<F: FnOnce() -> () + Send + 'static>(f: F) {
+        f();
     }
 }

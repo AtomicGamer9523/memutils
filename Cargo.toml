@@ -1,6 +1,8 @@
 [package]
 name = "rstools"
-version = "0.1.0"
-edition = "2018"
+version = "1.0.1"
+edition = "2021"
 
-[dependencies]
+[dependencies.lazy_static]
+path = "./lazy_static"
+package = "lazy_static"
