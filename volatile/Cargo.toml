@@ -23,26 +23,11 @@
 # 
 
 [package]
-name = "memutils"
-version = "1.0.0"
+name = "volatile"
+version = "0.4.5"
 edition = "2021"
 authors = ["AtomicGamer9523@github.com"]
 
-[dependencies.volatile]
-package = "volatile"
-path = "./volatile"
-version = "0.4.5"
-optional = true
-
 [features]
-default = ["full"]
-full = ["volatile"]
-
-reveal_hidden = []
-volatile = ["dep:volatile"]
-
-[workspace]
-members = [
-    "bit_field",
-    "volatile",
-]
+# Enable unstable features; requires Rust nightly; might break on compiler updates
+unstable = []

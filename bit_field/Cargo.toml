@@ -23,26 +23,7 @@
 # 
 
 [package]
-name = "memutils"
-version = "1.0.0"
-edition = "2021"
+name = "bit_field"
+version = "0.10.2"
 authors = ["AtomicGamer9523@github.com"]
-
-[dependencies.volatile]
-package = "volatile"
-path = "./volatile"
-version = "0.4.5"
-optional = true
-
-[features]
-default = ["full"]
-full = ["volatile"]
-
-reveal_hidden = []
-volatile = ["dep:volatile"]
-
-[workspace]
-members = [
-    "bit_field",
-    "volatile",
-]
+license = "MIT"

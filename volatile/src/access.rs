@@ -22,47 +22,25 @@
 // SOFTWARE.
 //
 
-//! A library with many useful utilities when dealing with memory and pointers.
+/// Helper trait that is implemented by [`ReadWrite`] and [`ReadOnly`].
+pub trait Readable {}
 
-#![no_std]
+/// Helper trait that is implemented by [`ReadWrite`] and [`WriteOnly`].
+pub trait Writable {}
 
-#![feature(ptr_metadata)]
-#![feature(ptr_internals)]
-#![feature(const_ptr_read)]
-#![feature(rustc_attrs)]
+/// Zero-sized marker type for allowing both read and write access.
+#[derive(Debug, Copy, Clone)]
+pub struct ReadWrite;
+impl Readable for ReadWrite {}
+impl Writable for ReadWrite {}
 
-#![forbid(
-    deprecated_in_future,
-    future_incompatible,
-    missing_docs,
-    missing_debug_implementations
-)]
-#![warn(
-    unused,
-    dead_code,
-    warnings,
-    clippy::all,
-)]
+/// Zero-sized marker type for allowing only read access.
+#[derive(Debug, Copy, Clone)]
+pub struct ReadOnly;
 
-#[cfg(feature = "reveal_hidden")]
-pub extern crate alloc;
-#[cfg(not(feature = "reveal_hidden"))]
-extern crate alloc;
-#[cfg(feature = "reveal_hidden")]
-pub mod nulls;
-#[cfg(not(feature = "reveal_hidden"))]
-pub(crate) mod nulls;
-#[cfg(feature = "reveal_hidden")]
-pub mod bytes;
-#[cfg(not(feature = "reveal_hidden"))]
-pub(crate) mod bytes;
+impl Readable for ReadOnly {}
 
-
-pub use alloc::alloc::{
-    alloc as malloc,
-    dealloc,
-    realloc,
-    Layout
-};
-pub use bytes::ByteObject;
-pub use nulls::{Null, Undefined};
+/// Zero-sized marker type for allowing only write access.
+#[derive(Debug, Copy, Clone)]
+pub struct WriteOnly;
+impl Writable for WriteOnly {}
