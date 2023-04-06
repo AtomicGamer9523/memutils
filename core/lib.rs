@@ -26,6 +26,18 @@
 
 #![no_std]
 
+#![feature(ptr_metadata)]
+#![feature(ptr_internals)]
+#![feature(const_ptr_read)]
+#![feature(rustc_attrs)]
+#![feature(const_ptr_is_null)]
+#![feature(allocator_api)]
+#![feature(core_intrinsics)]
+#![feature(rustc_private)]
+#![feature(const_mut_refs)]
+#![feature(stmt_expr_attributes)]
+#![feature(const_maybe_uninit_as_mut_ptr)]
+
 #![forbid(
     missing_debug_implementations,
     future_incompatible,
@@ -38,27 +50,40 @@
     warnings,
     unused,
 )]
-pub(crate) mod macros;
-pub use macros::*;
-pub(crate) mod mem;
-pub use mem::*;
 
-pub use memutilsmacros::{
-    not_safe
-};
-pub use memutilscore::*;
-
+#[cfg(feature = "reveal_hidden")]
+pub extern crate alloc as liballoc;
+#[cfg(not(feature = "reveal_hidden"))]
 #[doc(hidden)]
-pub mod libs {
-    pub use memutilsmacros::*;
-    #[doc(hidden)]
-    pub use memutilscore;
-    #[macro_export]
-    macro_rules! __fm {
-        ($obj:ident) => {
-            concat!("S", stringify!($obj))
-        };
-        () => ();
-    }
-    pub use __fm;
-}
+extern crate alloc as liballoc;
+#[cfg(feature = "reveal_hidden")]
+pub mod nulls;
+#[cfg(not(feature = "reveal_hidden"))]
+#[doc(hidden)]
+pub(crate) mod nulls;
+#[cfg(feature = "reveal_hidden")]
+pub mod bytes;
+#[cfg(not(feature = "reveal_hidden"))]
+#[doc(hidden)]
+pub(crate) mod bytes;
+#[cfg(feature = "reveal_hidden")]
+pub mod dynarray;
+#[cfg(not(feature = "reveal_hidden"))]
+#[doc(hidden)]
+pub(crate) mod dynarray;
+#[cfg(feature = "reveal_hidden")]
+pub mod prelude;
+#[cfg(not(feature = "reveal_hidden"))]
+#[doc(hidden)]
+pub(crate) mod pointerutils;
+mod impls;
+
+pub use liballoc::alloc::{
+    handle_alloc_error,
+    alloc as malloc,
+    dealloc,
+    realloc,
+    Layout
+};
+pub use bytes::*;
+pub use nulls::*;

@@ -23,11 +23,13 @@
 # 
 
 [package]
-name = "volatile"
-version = "0.4.5"
+name = "memutilscore"
+version = "1.0.0"
 edition = "2021"
 authors = ["AtomicGamer9523@github.com"]
 
+[lib]
+path = "lib.rs"
+
 [features]
-# Enable unstable features; requires Rust nightly; might break on compiler updates
-unstable = []
+reveal_hidden = []

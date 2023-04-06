@@ -45,7 +45,7 @@ impl Display for Undefined {
 }
 
 /// A safe wrapper for `ptr::null()`.
-#[derive(Copy, Clone, Eq, PartialEq)]
+#[derive(Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Null<T: ?Sized + core::ptr::Thin> {
     _private: *const T
 }
@@ -58,6 +58,12 @@ impl<T: ?Sized + core::ptr::Thin> Null<T> {
         Self {
             _private: core::ptr::null()
         }
+    }
+}
+impl<T> From<T> for Null<T> {
+    /// Ignores the value and returns a `Null` instance.
+    fn from(_: T) -> Self {
+        Self::new()
     }
 }
 impl<T: ?Sized + core::ptr::Thin> Debug for Null<T> {

@@ -27,3 +27,6 @@ name = "bit_field"
 version = "0.10.2"
 authors = ["AtomicGamer9523@github.com"]
 license = "MIT"
+
+[lib]
+path = "lib.rs"

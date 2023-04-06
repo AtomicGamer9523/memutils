@@ -23,11 +23,14 @@
 # 
 
 [package]
-name = "volatile"
-version = "0.4.5"
+name = "memutilstests"
+version = "1.0.0"
 edition = "2021"
 authors = ["AtomicGamer9523@github.com"]
 
-[features]
-# Enable unstable features; requires Rust nightly; might break on compiler updates
-unstable = []
+[dependencies.memutils]
+path = "../"
+
+[lib]
+path = "lib.rs"
+test = true

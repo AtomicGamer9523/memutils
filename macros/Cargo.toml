@@ -23,11 +23,21 @@
 # 
 
 [package]
-name = "volatile"
-version = "0.4.5"
+name = "memutilsmacros"
+version = "1.0.0"
 edition = "2021"
 authors = ["AtomicGamer9523@github.com"]
 
-[features]
-# Enable unstable features; requires Rust nightly; might break on compiler updates
-unstable = []
+[lib]
+proc-macro = true
+path = "lib.rs"
+
+[dependencies.quote]
+version = "1"
+
+[dependencies.syn]
+version = "2"
+features = ["full"]
+
+[dependencies.proc-macro2]
+version = "1"

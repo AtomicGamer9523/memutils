@@ -28,21 +28,37 @@ version = "1.0.0"
 edition = "2021"
 authors = ["AtomicGamer9523@github.com"]
 
+[lib]
+name = "memutils"
+
+[[bin]]
+name = "memutilsbin"
+path = "main.rs"
+
 [dependencies.volatile]
 package = "volatile"
 path = "./volatile"
-version = "0.4.5"
-optional = true
+optional = false
+
+[dependencies.memutilscore]
+package = "memutilscore"
+path = "./core"
+optional = false
+
+[dependencies.memutilsmacros]
+package = "memutilsmacros"
+path = "./macros"
+optional = false
 
 [features]
-default = ["full"]
-full = ["volatile"]
-
-reveal_hidden = []
-volatile = ["dep:volatile"]
+default = ["reveal_hidden"]
+reveal_hidden = ["memutilscore/reveal_hidden"]
 
 [workspace]
 members = [
     "bit_field",
     "volatile",
+    "macros",
+    "tests",
+    "core"
 ]
