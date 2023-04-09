@@ -1,9 +1,12 @@
 #![deny(unsafe_code)]
 
-#[test]
-fn no_heap_corrupt_test() {
-    use memutils::*;
+#[allow(unused)]
+use memutils::*;
 
+#[test]
+#[not_safe]
+fn no_heap_corrupt_test() {
+    #[repr(transparent)]
     struct Object {
         data: u32,
     }

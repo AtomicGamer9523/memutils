@@ -51,8 +51,11 @@ path = "./macros"
 optional = false
 
 [features]
-default = ["reveal_hidden"]
+default = ["full"]
+full = ["reveal_hidden", "unsafe_main"]
+
 reveal_hidden = ["memutilscore/reveal_hidden"]
+unsafe_main = ["memutilsmacros/not_safe_main"]
 
 [workspace]
 members = [

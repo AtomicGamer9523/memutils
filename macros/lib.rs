@@ -62,6 +62,19 @@ pub fn not_safe(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let attrs = &input.attrs;
     let vis = &input.vis;
 
+    #[cfg(not(feature = "not_safe_main"))]
+    if name == "main" {
+        return syn::Error::new_spanned(input, "main function cannot be marked as not_safe")
+            .to_compile_error()
+            .into();
+    }
+
+    if !cfg!(debug_assertions) {
+        return syn::Error::new_spanned(input, "non_safe functions are only allowed in debug builds. For release builds, use #[allow(unsafe_code)]")
+            .to_compile_error()
+            .into();
+    }
+
     let result = quote::quote! {
         #(#attrs)*
         #[allow(unsafe_code)]

@@ -1,18 +1,17 @@
 #![allow(dead_code, unused)]
 
-type PrivateObjectData = &'static str;
-
+#[repr(transparent)]
 #[derive(Debug)]
-pub struct PrivateObject {
-    private: PrivateObjectData,
+pub struct PrivateObject<T> {
+    private: T,
 }
 
-impl PrivateObject {
-    pub fn new() -> Self {
-        Self { private: "private" }
+impl<T> PrivateObject<T> {
+    pub fn new(v: T) -> Self {
+        Self { private: v }
     }
 
-    pub fn get_data(&self) -> PrivateObjectData {
-        self.private
+    pub fn get_data(&self) -> &T {
+        &self.private
     }
 }

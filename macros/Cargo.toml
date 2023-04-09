@@ -41,3 +41,6 @@ features = ["full"]
 
 [dependencies.proc-macro2]
 version = "1"
+
+[features]
+not_safe_main = []

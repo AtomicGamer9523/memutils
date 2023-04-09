@@ -17,7 +17,7 @@ pub trait FromRawPointer<T> {
 /// A trait that allows objects to be cloned by copying bytes.
 pub trait ByteClone {
     /// Clones the object by copying bytes.
-    fn byte_clone(&self) -> Self;
+    unsafe fn byte_clone(&self) -> Self;
 }
 
 impl<T> FromRawPointer<T> for T {
@@ -39,12 +39,10 @@ impl<T> PointerUtils<T> for T {
 }
 
 impl<T> ByteClone for T {
-    fn byte_clone(&self) -> Self {
-        unsafe {
-            let original = crate::ByteObject::from(self);
-            assert!(original.len() > 0);
-            let res = original.as_object();
-            res
-        }
+    unsafe fn byte_clone(&self) -> Self {
+        let original = crate::ByteObject::from(self);
+        assert!(original.len() > 0);
+        let res = original.as_object();
+        res
     }
 }

@@ -48,17 +48,14 @@ pub use memutilsmacros::{
 };
 pub use memutilscore::*;
 
+pub use core::arch::{
+    global_asm,
+    asm
+};
+
 #[doc(hidden)]
 pub mod libs {
     pub use memutilsmacros::*;
     #[doc(hidden)]
     pub use memutilscore;
-    #[macro_export]
-    macro_rules! __fm {
-        ($obj:ident) => {
-            concat!("S", stringify!($obj))
-        };
-        () => ();
-    }
-    pub use __fm;
 }

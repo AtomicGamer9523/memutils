@@ -1,24 +1,26 @@
-#![deny(unsafe_code)]
+#[allow(unused)]mod privobj;#[allow(unused)]use privobj::*;
 use memutils::*;
-
-mod privobj;use privobj::*;
 
 #[not_safe]
 fn main() {
-    let obj = PrivateObject::new();
+
+    let obj = PrivateObject::new("Hello World!");
     println!("{:?}", &obj);
 
-    // obj.private = "public!";
+    // obj.private = "Hello New World!";
 
     let mut new_obj = mem!(
         obj as {
-            pub private: &'static str,
+            pub(crate) private: &'static str,
         }
     );
 
-    new_obj.private = "Hello World!";
+    new_obj.private = "Hello New World!";
 
-    let obj = mem!(turn new_obj into PrivateObject);
+    let obj = mem!(
+        turn new_obj into PrivateObject<&str>
+    );
 
     println!("{:?}", obj)
+
 }

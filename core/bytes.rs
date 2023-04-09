@@ -46,6 +46,7 @@ pub struct ByteObject<'a,T> {
 }
 
 /// A guard that frees the memory when dropped.
+#[derive(Clone, PartialEq, Eq, Hash)]
 pub struct ByteGuard<T> {
     pub(crate) ptr: *mut u8,
     pub(crate) layout: crate::Layout,
@@ -56,14 +57,14 @@ pub struct ByteGuard<T> {
 /// **G**et **O**bject from const pointer.
 /// 
 /// Returns a mutable reference to the object.
-pub const fn go<'a, T>(ptr: *const T) -> &'a T {
-    unsafe { &*ptr }
+pub const unsafe fn go<'a, T>(ptr: *const T) -> &'a T {
+    &*ptr
 }
 
 /// ## GOM
 /// **G**et **O**bject **M**ut from mutable pointer.
 /// 
 /// Returns a mutable reference to the object.
-pub const fn gom<'a, T>(ptr: *mut T) -> &'a mut T {
-    unsafe { &mut *ptr }
+pub const unsafe fn gom<'a, T>(ptr: *mut T) -> &'a mut T {
+    &mut *ptr
 }

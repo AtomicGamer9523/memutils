@@ -57,11 +57,11 @@ macro_rules! mem_internals {
     }) => {
         {
             #[allow(non_camel_case_types)]
+            #[repr(transparent)]
             struct $name {
                 $($field_vis $field_name: $field_type,)*
             }
-            let res: $name = core::mem::transmute($obj);
-            res
+            $crate::mem_internals!(@CAST $obj;$name)
         }
     };
     (@CAST $obj:expr;$t:ty) => {
