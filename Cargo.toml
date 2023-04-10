@@ -40,6 +40,11 @@ package = "volatile"
 path = "./volatile"
 optional = false
 
+[dependencies.bit_field]
+package = "bit_field"
+path = "./bit_field"
+optional = false
+
 [dependencies.memutilscore]
 package = "memutilscore"
 path = "./core"
