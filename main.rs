@@ -1,4 +1,7 @@
+#![deny(unsafe_code)]
+
 #[allow(unused)]mod privobj;#[allow(unused)]use privobj::*;
+
 use memutils::*;
 
 #[not_safe]

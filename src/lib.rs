@@ -59,3 +59,9 @@ pub mod libs {
     #[doc(hidden)]
     pub use memutilscore;
 }
+
+#[cfg(feature = "bit_field")]
+pub use bit_field;
+
+#[cfg(feature = "volatile")]
+pub use volatile;
