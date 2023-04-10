@@ -1,7 +1,7 @@
 #![deny(unsafe_code)]
 
 #[allow(unused)]
-use memutils::*;
+use libmemutils::*;
 
 #[test]
 #[not_safe]
