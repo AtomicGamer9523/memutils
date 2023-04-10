@@ -40,8 +40,10 @@
 
 #![forbid(
     missing_debug_implementations,
-    future_incompatible,
     missing_docs,
+)]
+#![deny(
+    future_incompatible
 )]
 #![warn(
     deprecated_in_future,
@@ -51,8 +53,12 @@
     unused,
 )]
 
+#[doc(hidden)]
+extern crate alloc;
+
 #[cfg(feature = "reveal_hidden")]
-pub extern crate alloc as liballoc;
+#[allow(pub_use_of_private_extern_crate, forbidden_lint_groups, future_incompatible, unused)]
+pub use alloc as liballoc;
 #[cfg(not(feature = "reveal_hidden"))]
 #[doc(hidden)]
 extern crate alloc as liballoc;
