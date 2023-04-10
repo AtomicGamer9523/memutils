@@ -52,8 +52,9 @@ optional = false
 
 [features]
 default = ["full"]
-full = ["reveal_hidden", "unsafe_main"]
-
+full = ["reveal_hidden", "unsafe_main", "bit_field", "volatile"]
+volatile = []
+bit_field = []
 reveal_hidden = ["memutilscore/reveal_hidden"]
 unsafe_main = ["memutilsmacros/not_safe_main"]
 
