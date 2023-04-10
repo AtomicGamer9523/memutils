@@ -22,48 +22,6 @@
 # SOFTWARE.
 # 
 
-[package]
-name = "memutils"
-version = "1.0.0"
-edition = "2021"
-authors = ["AtomicGamer9523@github.com"]
+[unstable]
+build-std = ["core", "compiler_builtins", "alloc"]
 
-[lib]
-name = "libmemutils"
-
-[dependencies.volatile]
-package = "volatile"
-path = "./volatile"
-optional = false
-
-[dependencies.bit_field]
-package = "bit_field"
-path = "./bit_field"
-optional = false
-
-[dependencies.memutilscore]
-package = "memutilscore"
-path = "./core"
-optional = false
-
-[dependencies.memutilsmacros]
-package = "memutilsmacros"
-path = "./macros"
-optional = false
-
-[features]
-default = ["full"]
-full = ["reveal_hidden", "unsafe_main", "bit_field", "volatile"]
-volatile = []
-bit_field = []
-reveal_hidden = ["memutilscore/reveal_hidden"]
-unsafe_main = ["memutilsmacros/not_safe_main"]
-
-[workspace]
-members = [
-    "bit_field",
-    "volatile",
-    "macros",
-    "tests",
-    "core"
-]
