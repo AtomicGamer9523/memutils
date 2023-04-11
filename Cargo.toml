@@ -29,7 +29,7 @@ edition = "2021"
 authors = ["AtomicGamer9523@github.com"]
 
 [lib]
-name = "libmemutils"
+name = "memutils"
 
 [dependencies.volatile]
 package = "volatile"
@@ -52,12 +52,14 @@ path = "./macros"
 optional = false
 
 [features]
-default = ["full"]
-full = ["reveal_hidden", "unsafe_main", "bit_field", "volatile"]
+default = ["bit_field", "volatile", "core"]
+full = ["reveal_hidden", "unsafe_main", "bit_field", "volatile", "core"]
 volatile = []
 bit_field = []
 reveal_hidden = ["memutilscore/reveal_hidden"]
 unsafe_main = ["memutilsmacros/not_safe_main"]
+core = ["memutilscore/core"]
+minimal = ["bit_field", "volatile"]
 
 [workspace]
 members = [

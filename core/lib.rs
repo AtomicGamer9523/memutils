@@ -26,17 +26,8 @@
 
 #![no_std]
 
-#![feature(ptr_metadata)]
-#![feature(ptr_internals)]
-#![feature(const_ptr_read)]
-#![feature(rustc_attrs)]
-#![feature(const_ptr_is_null)]
-#![feature(allocator_api)]
-#![feature(core_intrinsics)]
-#![feature(rustc_private)]
 #![feature(const_mut_refs)]
-#![feature(stmt_expr_attributes)]
-#![feature(const_maybe_uninit_as_mut_ptr)]
+#![feature(ptr_metadata)]
 
 #![forbid(
     missing_debug_implementations,
@@ -53,12 +44,9 @@
     unused,
 )]
 
-#[doc(hidden)]
-extern crate alloc;
-
 #[cfg(feature = "reveal_hidden")]
 #[allow(pub_use_of_private_extern_crate, forbidden_lint_groups, future_incompatible, unused)]
-pub use alloc as liballoc;
+pub extern crate alloc as liballoc;
 #[cfg(not(feature = "reveal_hidden"))]
 #[doc(hidden)]
 extern crate alloc as liballoc;
@@ -79,11 +67,7 @@ pub mod dynarray;
 pub(crate) mod dynarray;
 #[cfg(feature = "reveal_hidden")]
 pub mod prelude;
-#[cfg(not(feature = "reveal_hidden"))]
-#[doc(hidden)]
-pub(crate) mod pointerutils;
 mod impls;
-
 pub use liballoc::alloc::{
     handle_alloc_error,
     alloc as malloc,

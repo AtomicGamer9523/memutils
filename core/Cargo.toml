@@ -33,3 +33,4 @@ path = "lib.rs"
 
 [features]
 reveal_hidden = []
+core = []

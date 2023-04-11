@@ -23,11 +23,8 @@
 macro_rules! clone {
     ($i:expr) => {
         {
-            unsafe fn __clone__<T>(t: &T) -> T {
-                use memutils::prelude::*;
-                t.byte_clone()
-            }
-            __clone__($i)
+            use memutils::prelude::*;
+            ($i).byte_clone()
         }
     };
     () => ();
